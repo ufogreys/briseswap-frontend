@@ -6,7 +6,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "transfer": "cp -R ./sub_packages/@pancakeswap-libs ./node_modules && cp -R ./sub_packages/@pancakeswap ./node_modules",
     "start": "yarn run transfer && react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn run transfer && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
