@@ -40,7 +40,7 @@ const StyledInput = styled(Input)`
   width: 60px;
   margin: 0 8px;
   padding: 0 8px;
-
+  color: ${({ theme }) => theme.colors.background};
   ${({ theme }) => theme.mediaQueries.xs} {
     width: 80px;
   }
@@ -86,8 +86,8 @@ const ModalInput: React.FC<ModalInputProps> = ({
     <div style={{ position: 'relative' }}>
       <StyledTokenInput isWarning={isBalanceZero}>
         <Flex justifyContent="space-between" pl="16px">
-          <Text fontSize="14px">{inputTitle}</Text>
-          <Text fontSize="14px">{t('Balance: %balance%', { balance: displayBalance(max) })}</Text>
+          <Text color='background' fontSize="14px">{inputTitle}</Text>
+          <Text color='background' fontSize="14px">{t('Balance: %balance%', { balance: displayBalance(max) })}</Text>
         </Flex>
         <Flex alignItems="flex-end" justifyContent="space-around">
           <StyledInput
@@ -102,7 +102,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
           <Button scale="sm" onClick={onSelectMax} mr="8px">
             {t('Max')}
           </Button>
-          <Text fontSize="16px">{symbol}</Text>
+          <Text color='background' fontSize="16px">{symbol}</Text>
         </Flex>
       </StyledTokenInput>
       {isBalanceZero && (
