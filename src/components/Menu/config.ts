@@ -13,11 +13,11 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     items: [
       {
         label: t('Exchange'),
-        href: 'https://exchange.flutterswap.finance/#/swap',
+        href: 'https://exchange.briseswap.finance/#/swap',
       },
       {
         label: t('Liquidity'),
-        href: 'https://exchange.flutterswap.finance/#/pool',
+        href: 'https://exchange.briseswap.finance/#/pool',
       },
       // {
       //   label: t('LP Migration'),

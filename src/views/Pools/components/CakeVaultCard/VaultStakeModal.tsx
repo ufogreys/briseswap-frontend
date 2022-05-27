@@ -63,7 +63,9 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
   const handleChangePercent = (sliderPercent: number) => {
     if (sliderPercent > 0) {
       const percentageOfStakingMax = stakingMax.dividedBy(100).multipliedBy(sliderPercent)
+
       const amountToStake = getFullDisplayBalance(percentageOfStakingMax, stakingToken.decimals, stakingToken.decimals)
+      
       setStakeAmount(amountToStake)
     } else {
       setStakeAmount('')
@@ -146,6 +148,8 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
   }
 
   const handleConfirmClick = async () => {
+    // console.log('stakeAmount: ', stakeAmount)
+    // console.log('typeof stakeAmount: ', typeof stakeAmount)
     const convertedStakeAmount = getDecimalAmount(new BigNumber(stakeAmount), stakingToken.decimals)
     setPendingTx(true)
     // unstaking

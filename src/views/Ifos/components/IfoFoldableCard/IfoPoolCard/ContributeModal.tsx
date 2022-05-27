@@ -100,7 +100,7 @@ const ContributeModal: React.FC<Props> = ({
           <Text>{t('Commit')}:</Text>
           <Flex flexGrow={1} justifyContent="flex-end">
             <Image
-              src={`/images/farms/${currency.symbol.split(' ')[0].toLocaleLowerCase()}.svg`}
+              src={`/images/farms/${currency.symbol.split(' ')[0].toLocaleLowerCase()}.png`}
               width={24}
               height={24}
             />

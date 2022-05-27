@@ -18,7 +18,6 @@ const Apr: React.FC<AprProps> = ({ pool, showIcon, performanceFee = 0, ...props 
   const { t } = useTranslation()
 
   const { apr: earningsPercentageToDisplay, roundingDecimals, compoundFrequency } = getAprData(pool, performanceFee)
-
   const apyModalLink =
     stakingToken.address &&
     `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[process.env.REACT_APP_CHAIN_ID]}`
@@ -50,6 +49,7 @@ const Apr: React.FC<AprProps> = ({ pool, showIcon, performanceFee = 0, ...props 
               onClick={openRoiModal}
               fontSize="16px"
               isDisabled={isFinished}
+              // eslint-disable-next-line no-nested-ternary
               value={isFinished ? 0 : earningsPercentageToDisplay}
               decimals={2}
               unit="%"
