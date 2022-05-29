@@ -219,10 +219,10 @@ const Pools: React.FC = () => {
               {t('High APR, low risk.')}
             </Heading>
           </Flex>
-          {/* <Flex flex="1" height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
-            <HelpButton />
+          <Flex flex="1" height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
+            {/* <HelpButton /> */}
             <BountyCard />
-          </Flex> */}
+          </Flex>
         </Flex>
       </PageHeader>
       <Page>
