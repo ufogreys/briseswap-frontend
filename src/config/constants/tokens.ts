@@ -14,7 +14,7 @@ const tokens = {
     projectLink: 'https://briseswap.finance/',
   },
   bpad: {
-    symbol: 'Bpad',
+    symbol: 'BPAD',
     address: {
       32520: '0x71946a5C9dA7C95ee804a9BE561EC15A3F286A7D',
       56: '',
