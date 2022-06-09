@@ -342,11 +342,12 @@ const Farms: React.FC = () => {
     <>
       <PageHeader>
         <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-          {t('Farms')}
+          {t('Mines')}
         </Heading>
         <Heading scale="lg" color="text">
-          {t('Stake Liquidity Pool (LP) tokens to earn.')}
+          {t('Stake Liquidity Pool (LP) tokens and other tokens to earn.')}
         </Heading>
+        <Text> {t('3% deposit fee & 2% withdrawal fee')}</Text>
       </PageHeader>
       <Page>
         <ControlContainer>
@@ -389,7 +390,7 @@ const Farms: React.FC = () => {
             </LabelWrapper>
             <LabelWrapper style={{ marginLeft: 16 }}>
               <Text color='textSubtle' textTransform="uppercase">{t('Search')}</Text>
-              <SearchInput onChange={handleChangeQuery} placeholder="Search Farms" />
+              <SearchInput onChange={handleChangeQuery} placeholder="Search Mines" />
             </LabelWrapper>
           </FilterContainer>
         </ControlContainer>

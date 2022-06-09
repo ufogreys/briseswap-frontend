@@ -11,6 +11,9 @@ import { fetchFarmUserDataAsync } from 'state/farms'
 import { useLpTokenPrice } from 'state/hooks'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
+import { farmsConfig } from 'config/constants'
+import { BIG_TEN } from 'utils/bigNumber'
+import useTokenDecimals from 'hooks/useTokenDecimal'
 import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
@@ -45,23 +48,31 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   const { account } = useWeb3React()
   const lpPrice = useLpTokenPrice(tokenName)
 
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const lpAddress = farmsConfig.filter(farm => farm.pid === pid)[0].lpAddresses[chainId]
+  const { decimals: lpTokenDecimals} = useTokenDecimals(lpAddress)
+  
+
   const handleStake = async (amount: string) => {
-    await onStake(amount)
+    
+
+    await onStake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals.toNumber())).toString())
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const handleUnstake = async (amount: string) => {
-    await onUnstake(amount)
+    // await onUnstake(amount)
+    await onUnstake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals.toNumber())).toString())
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const displayBalance = useCallback(() => {
     const stakedBalanceBigNumber = getBalanceAmount(stakedBalance)
     if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      return getFullDisplayBalance(stakedBalance).toLocaleString()
+      return getFullDisplayBalance(stakedBalance, lpTokenDecimals.toNumber()).toLocaleString()
     }
     return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
-  }, [stakedBalance])
+  }, [stakedBalance, lpTokenDecimals])
 
   const [onPresentDeposit] = useModal(
     <DepositModal max={tokenBalance} onConfirm={handleStake} tokenName={tokenName} addLiquidityUrl={addLiquidityUrl} />,
@@ -76,7 +87,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
         onClick={onPresentDeposit}
         disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
       >
-        {t('Stake LP')}
+        {t('Stake')}
       </Button>
     ) : (
       <IconButtonWrapper>

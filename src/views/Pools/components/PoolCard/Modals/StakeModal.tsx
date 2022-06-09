@@ -97,6 +97,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         setPendingTx(false)
         onDismiss()
       } catch (e) {
+        console.log(e)
         toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
         setPendingTx(false)
       }
@@ -113,6 +114,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         setPendingTx(false)
         onDismiss()
       } catch (e) {
+        console.log(e)
         toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
         setPendingTx(false)
       }

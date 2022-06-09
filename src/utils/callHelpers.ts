@@ -18,7 +18,6 @@ export const approve = async (lpContract, masterChefContract, account) => {
     .approve(masterChefContract.options.address, ethers.constants.MaxUint256)
     .send({ from: account })
 }
-
 export const stake = async (masterChefContract, pid, amount, account) => {
   if (pid === 0) {
     return masterChefContract.methods
@@ -28,9 +27,8 @@ export const stake = async (masterChefContract, pid, amount, account) => {
         return tx.transactionHash
       })
   }
-
   return masterChefContract.methods
-    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .deposit(pid, amount)
     .send({ from: account, gas: DEFAULT_GAS_LIMIT })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -70,7 +68,7 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
   }
 
   return masterChefContract.methods
-    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
+    .withdraw(pid, amount)
     .send({ from: account, gas: DEFAULT_GAS_LIMIT })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -166,7 +164,7 @@ export const getUserStakeInCakeBnbLp = async (account: string, block?: number) =
 
     return new BigNumber(cakeLPBalance.toSignificant(18))
   } catch (error) {
-    console.error(`BSWAP-BNB LP error: ${error}`)
+    console.error(`BSWAP-BRISE LP error: ${error}`)
     return BIG_ZERO
   }
 }

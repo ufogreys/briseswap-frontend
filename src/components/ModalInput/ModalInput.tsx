@@ -71,6 +71,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
   const { t } = useTranslation()
   const isBalanceZero = max === '0' || !max
 
+
   const displayBalance = (balance: string) => {
     if (isBalanceZero) {
       return '0'
