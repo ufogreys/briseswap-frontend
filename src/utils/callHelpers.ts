@@ -18,11 +18,10 @@ export const approve = async (lpContract, masterChefContract, account) => {
     .approve(masterChefContract.options.address, ethers.constants.MaxUint256)
     .send({ from: account })
 }
-
 export const stake = async (masterChefContract, pid, amount, account) => {
   if (pid === 0) {
     return masterChefContract.methods
-      .enterStaking(amount)
+      .enterStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
       .send({ from: account, gas: DEFAULT_GAS_LIMIT })
       .on('transactionHash', (tx) => {
         return tx.transactionHash
@@ -61,7 +60,7 @@ export const sousStakeBnb = async (sousChefContract, amount, account) => {
 export const unstake = async (masterChefContract, pid, amount, account) => {
   if (pid === 0) {
     return masterChefContract.methods
-      .leaveStaking(amount)
+      .leaveStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
       .send({ from: account, gas: DEFAULT_GAS_LIMIT })
       .on('transactionHash', (tx) => {
         return tx.transactionHash

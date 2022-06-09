@@ -87,7 +87,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
         onClick={onPresentDeposit}
         disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
       >
-        {t('Stake LP')}
+        {t('Stake')}
       </Button>
     ) : (
       <IconButtonWrapper>

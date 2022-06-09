@@ -164,7 +164,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
             variant="secondary"
             disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
           >
-            {t('Stake LP')}
+            {t('Stake')}
           </Button>
         </ActionContent>
       </ActionContainer>
