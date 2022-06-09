@@ -39,7 +39,8 @@ const multicall = async (abi: any[], calls: Call[], options: MulticallOptions = 
     return res
   } catch (error) {
     console.error(error);
-    throw new Error(error)
+    // throw new Error(error)
+    return []
     // throw new Error("Error")
     
   }
@@ -52,7 +53,6 @@ const multicall = async (abi: any[], calls: Call[], options: MulticallOptions = 
  * 2. The return inclues a boolean whether the call was successful e.g. [wasSuccessfull, callResult]
  */
 export const multicallv2 = async (abi: any[], calls: Call[], options: MulticallOptions = {}) => {
-  console.log('MulticallV2 called: ')
   // const web3 = options.web3 || getWeb3NoAccount()
   const web3 = options.web3 || (window.initWeb3)
 
@@ -60,12 +60,10 @@ export const multicallv2 = async (abi: any[], calls: Call[], options: MulticallO
   const itf = new Interface(abi)
 
   const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)])
-  console.log('calldata ', calldata)
   
   const returnData = await multi.methods
   .tryAggregate(options.requireSuccess === undefined ? true : options.requireSuccess, calldata)
   .call(undefined, options.blockNumber)
-  console.log('returnData ', returnData)
   
   const res = returnData.map((call, i) => {
     const [result, data] = call
@@ -74,7 +72,6 @@ export const multicallv2 = async (abi: any[], calls: Call[], options: MulticallO
       data: itf.decodeFunctionResult(calls[i].name, data),
     }
   })
-  console.log('res ', res)
 
   return res
 }

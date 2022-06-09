@@ -30,7 +30,7 @@ const config: (t: ContextApi['t']) => MenuEntry[] = (t) => [
     ],
   },
   {
-    label: t('Farms'),
+    label: t('Mines'),
     icon: 'FarmIcon',
     href: '/farms',
   },

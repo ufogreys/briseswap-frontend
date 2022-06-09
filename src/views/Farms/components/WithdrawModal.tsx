@@ -5,6 +5,8 @@ import ModalActions from 'components/ModalActions'
 import ModalInput from 'components/ModalInput'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
+import { farmsConfig } from 'config/constants'
+import useTokenDecimals from 'hooks/useTokenDecimal'
 
 interface WithdrawModalProps {
   max: BigNumber
@@ -17,9 +19,16 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
+  
+  const chainId = process.env.REACT_APP_CHAIN_ID
+  const lpAddress = farmsConfig.filter(farm => farm.lpSymbol === tokenName)[0].lpAddresses[chainId]
+  const { decimals: lpTokenDecimals} = useTokenDecimals(lpAddress)
+  
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max)
-  }, [max])
+    return getFullDisplayBalance(max, lpTokenDecimals.toNumber())
+  }, [max, lpTokenDecimals])
+
+
 
   const valNumber = new BigNumber(val)
   const fullBalanceNumber = new BigNumber(fullBalance)
@@ -38,7 +47,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
   }, [fullBalance, setVal])
 
   return (
-    <Modal title={t('Unstake LP tokens')} onDismiss={onDismiss}>
+    <Modal title={t('Unstake')} onDismiss={onDismiss}>
       <ModalInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}
@@ -46,6 +55,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
         max={fullBalance}
         symbol={tokenName}
         inputTitle={t('Unstake')}
+        decimals={lpTokenDecimals.toNumber()}
       />
       <ModalActions>
         <Button variant="secondary" onClick={onDismiss} width="100%" disabled={pendingTx}>

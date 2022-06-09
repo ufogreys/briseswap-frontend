@@ -7,7 +7,7 @@ const pools: PoolConfig[] = [
     stakingToken: tokens.bswap,
     earningToken: tokens.bswap,
     contractAddress: {
-      32520: '0xF386A02f5c233628751E9aA46BdBf1E54645Ad12',
+      32520: '0xbABa7B69D1C900DA4F6430933a31DC492b106DeE',
       97: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
       56: '0x496Cc0609D749216Bb2a999b683468649759D338',
     },
