@@ -1,6 +1,7 @@
 import React from 'react'
 import { Menu as UikitMenu } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
+
 import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
@@ -16,6 +17,8 @@ const Menu = (props) => {
   const { profile } = useProfile()
   const { currentLanguage, setLanguage, t } = useTranslation()
 
+
+  
   return (
     <UikitMenu
       account={account}

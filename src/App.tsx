@@ -1,9 +1,12 @@
-import React, { lazy } from 'react'
+import React, { lazy, useEffect } from 'react'
 import { Router, Redirect, Route, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap/uikit'
+import { connectorLocalStorageKey, ResetCSS } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { usePollCoreFarmData, useFetchProfile, usePollBlockNumber } from 'state/hooks'
+// import { useWeb3React } from '@web3-react/core'
+// import useAuth from 'hooks/useAuth'
+// import { connectorsByName } from 'utils/web3React'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
@@ -34,10 +37,31 @@ BigNumber.config({
 })
 
 const App: React.FC = () => {
+  // const { library } = useWeb3React();
+  // const { login } = useAuth()
+
   usePollBlockNumber()
   useEagerConnect()
   useFetchProfile()
   usePollCoreFarmData()
+
+  // useEffect(() => {
+  //   const connectWalletOnPageLoad = async () => {
+  //     const connectorId = localStorage?.getItem(connectorLocalStorageKey);
+  //     if (connectorId) {
+  //         try {
+  //       const connector = connectorsByName[connectorId];
+  //         login(connector);
+  //         window.initWeb3 = library;
+  
+  //         // localStorage.setItem('isWalletConnected', true)
+  //         } catch (ex) {
+  //         console.log(ex)
+  //         }
+  //     }
+  //   }
+  //   connectWalletOnPageLoad()
+  // }, [library, login])
 
   return (
     <Router history={history}>

@@ -5,6 +5,9 @@ import getRpcUrl from 'utils/getRpcUrl'
 
 const RPC_URL = getRpcUrl()
 const httpProvider = new Web3.providers.HttpProvider(RPC_URL, { timeout: 10000 } as HttpProviderOptions)
+// wss://nc-ws-node.brisescan.com:443
+// new Web3.providers.WebsocketProvider('ws://remotenode.com:8546'));
+// const httpProvider = new Web3.providers.WebsocketProvider('wss://nc-ws-node.brisescan.com:443')
 const web3NoAccount = new Web3(httpProvider)
 
 const getWeb3NoAccount = () => {
@@ -13,6 +16,7 @@ const getWeb3NoAccount = () => {
 
 const getWeb3WithArchivedNodeProvider = () => {
   const archivedHttpProvider = new Web3.providers.HttpProvider(ARCHIVED_NODE, { timeout: 10000 } as HttpProviderOptions)
+  // const archivedHttpProvider = new Web3.providers.WebsocketProvider('wss://nc-ws-node.brisescan.com:443')
   return new Web3(archivedHttpProvider)
 }
 
