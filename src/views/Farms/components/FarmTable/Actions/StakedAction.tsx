@@ -15,6 +15,8 @@ import { getBep20Contract } from 'utils/contractHelpers'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
 import { useAppDispatch } from 'state'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
+import { BIG_TEN } from 'utils/bigNumber'
+import { farmsConfig } from 'config/constants'
 import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
@@ -49,6 +51,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const web3 = useWeb3()
   const location = useLocation()
   const lpPrice = useLpTokenPrice(lpSymbol)
+  
+  const lpTokenDecimals = farmsConfig.filter(farm => farm.pid === pid)[0].lpDecimals
 
   const isApproved = account && allowance && allowance.isGreaterThan(0)
 
@@ -60,22 +64,26 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
 
   const handleStake = async (amount: string) => {
-    await onStake(amount)
+    // await onStake(amount)
+    await onStake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals)).toString())
+
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const handleUnstake = async (amount: string) => {
-    await onUnstake(amount)
+    // await onUnstake(amount)
+    await onUnstake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals)).toString())
+
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const displayBalance = useCallback(() => {
     const stakedBalanceBigNumber = getBalanceAmount(stakedBalance)
     if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      return getFullDisplayBalance(stakedBalance).toLocaleString()
+      return getFullDisplayBalance(stakedBalance, lpTokenDecimals).toLocaleString()
     }
     return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
-  }, [stakedBalance])
+  }, [stakedBalance, lpTokenDecimals])
 
   const [onPresentDeposit] = useModal(
     <DepositModal max={tokenBalance} onConfirm={handleStake} tokenName={lpSymbol} addLiquidityUrl={addLiquidityUrl} />,

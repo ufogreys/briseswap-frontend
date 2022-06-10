@@ -52,7 +52,6 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
 
   const handleStake = async (amount: string) => {
     
-
     await onStake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals)).toString())
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
