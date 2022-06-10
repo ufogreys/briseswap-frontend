@@ -7,7 +7,6 @@ import masterChefABI from 'config/abi/masterchef.json'
 import { farmsConfig } from 'config/constants'
 import { FarmConfig } from 'config/constants/types'
 import useRefresh from './useRefresh'
-// import useBrisePriceFromAPI from './useBrisePriceFromAPI'
 
 export interface FarmWithBalance extends FarmConfig {
   balance: BigNumber
@@ -17,8 +16,6 @@ const useFarmsWithBalance = () => {
   const [farmsWithBalances, setFarmsWithBalances] = useState<FarmWithBalance[]>([])
   const { account } = useWeb3React()
   const { fastRefresh } = useRefresh()
-  // const brisePrice = useBrisePriceFromAPI()
-  // console.log('brisePrice: ', brisePrice)
 
   useEffect(() => {
     const fetchBalances = async () => {
