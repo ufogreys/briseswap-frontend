@@ -6,7 +6,6 @@ import ModalInput from 'components/ModalInput'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import { farmsConfig } from 'config/constants'
-import useTokenDecimals from 'hooks/useTokenDecimal'
 
 interface DepositModalProps {
   max: BigNumber
@@ -21,12 +20,10 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
 
-  const chainId = process.env.REACT_APP_CHAIN_ID
-  const lpAddress = farmsConfig.filter(farm => farm.lpSymbol === tokenName)[0].lpAddresses[chainId]
-  const { decimals: lpTokenDecimals} = useTokenDecimals(lpAddress)
-  
+  const lpTokenDecimals = farmsConfig.filter(farm => farm.lpSymbol === tokenName)[0].lpDecimals
+   
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max, lpTokenDecimals.toNumber())
+    return getFullDisplayBalance(max, lpTokenDecimals)
   }, [max, lpTokenDecimals])
 
 
@@ -56,7 +53,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
         symbol={tokenName}
         addLiquidityUrl={addLiquidityUrl}
         inputTitle={t('Stake')}
-        decimals={lpTokenDecimals.toNumber()}
+        decimals={lpTokenDecimals}
       />
       <ModalActions>
         <Button variant="secondary" onClick={onDismiss} width="100%" disabled={pendingTx}>

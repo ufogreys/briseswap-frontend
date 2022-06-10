@@ -55,6 +55,7 @@ export interface FarmConfig {
   pid: number
   lpSymbol: string
   lpAddresses: Address
+  lpDecimals: number
   token: Token
   quoteToken: Token
   multiplier?: string

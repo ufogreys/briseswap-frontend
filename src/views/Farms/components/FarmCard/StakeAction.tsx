@@ -13,7 +13,6 @@ import useStake from 'hooks/useStake'
 import useUnstake from 'hooks/useUnstake'
 import { farmsConfig } from 'config/constants'
 import { BIG_TEN } from 'utils/bigNumber'
-import useTokenDecimals from 'hooks/useTokenDecimal'
 import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import DepositModal from '../DepositModal'
 import WithdrawModal from '../WithdrawModal'
@@ -48,28 +47,26 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   const { account } = useWeb3React()
   const lpPrice = useLpTokenPrice(tokenName)
 
-  const chainId = process.env.REACT_APP_CHAIN_ID
-  const lpAddress = farmsConfig.filter(farm => farm.pid === pid)[0].lpAddresses[chainId]
-  const { decimals: lpTokenDecimals} = useTokenDecimals(lpAddress)
+  const lpTokenDecimals = farmsConfig.filter(farm => farm.lpSymbol === tokenName)[0].lpDecimals
   
 
   const handleStake = async (amount: string) => {
     
 
-    await onStake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals.toNumber())).toString())
+    await onStake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals)).toString())
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const handleUnstake = async (amount: string) => {
     // await onUnstake(amount)
-    await onUnstake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals.toNumber())).toString())
+    await onUnstake(new BigNumber(amount).times(BIG_TEN.pow(lpTokenDecimals)).toString())
     dispatch(fetchFarmUserDataAsync({ account, pids: [pid] }))
   }
 
   const displayBalance = useCallback(() => {
     const stakedBalanceBigNumber = getBalanceAmount(stakedBalance)
     if (stakedBalanceBigNumber.gt(0) && stakedBalanceBigNumber.lt(0.0001)) {
-      return getFullDisplayBalance(stakedBalance, lpTokenDecimals.toNumber()).toLocaleString()
+      return getFullDisplayBalance(stakedBalance, lpTokenDecimals).toLocaleString()
     }
     return stakedBalanceBigNumber.toFixed(3, BigNumber.ROUND_DOWN)
   }, [stakedBalance, lpTokenDecimals])
