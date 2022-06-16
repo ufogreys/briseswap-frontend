@@ -17,7 +17,9 @@ import isArchivedPid from 'utils/farmHelpers'
 import { latinise } from 'utils/latinise'
 import PageHeader from 'components/PageHeader'
 import SearchInput from 'components/SearchInput'
+import useGetTokenFarmLiquidityUsd from 'hooks/useGetTokenFarmLiquidityUsd'
 import Select, { OptionProps } from 'components/Select/Select'
+import getTokenFarmLiquidityUsd from 'utils/getTokenFarmLiquidityUsd'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import Table from './components/FarmTable/FarmTable'
 import FarmTabButtons from './components/FarmTabButtons'
@@ -105,8 +107,12 @@ const Farms: React.FC = () => {
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarms()
   const cakePrice = usePriceCakeBusd()
+  // console.log('farmsLP: ', farmsLP)
+  // useGetTokenFarmLiquidityUsd(farm.lpAddresses, farm.lpDecimals)
+
   const [query, setQuery] = useState('')
-  const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, { localStorageKey: 'pancake_farm_view' })
+  // const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, { localStorageKey: 'pancake_farm_view' })
+  const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, { localStorageKey: 'briseswap_farm_view' })
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
 
@@ -147,9 +153,9 @@ const Farms: React.FC = () => {
         if (!farm.lpTotalInQuoteToken || !farm.quoteToken.busdPrice) {
           return farm
         }
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
+        const totalLiquidity = farm.isLpToken ? (new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)) : (new BigNumber(farm.farmTokenTotal).times(farm.lpTokenPriceUsd))
+        
         const apr = isActive ? getFarmApr(new BigNumber(farm.poolWeight), cakePrice, totalLiquidity) : 0
-
         return { ...farm, apr, liquidity: totalLiquidity }
       })
 

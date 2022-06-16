@@ -2,7 +2,9 @@ import BigNumber from 'bignumber.js'
 import masterchefABI from 'config/abi/masterchef.json'
 import erc20 from 'config/abi/erc20.json'
 import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import { getRouterContract } from 'utils/contractHelpers'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
+import brisePriceFromAPI from 'utils/brisePriceFromAPI'
 import multicall from 'utils/multicall'
 import { Farm, SerializedBigNumber } from '../types'
 
@@ -12,14 +14,24 @@ type PublicFarmData = {
   tokenAmountTotal: SerializedBigNumber
   quoteTokenAmountTotal: SerializedBigNumber
   lpTotalInQuoteToken: SerializedBigNumber
+  farmTokenTotal: SerializedBigNumber
+  lpTokenPriceUsd: SerializedBigNumber
   lpTotalSupply: SerializedBigNumber
   tokenPriceVsQuote: SerializedBigNumber
   poolWeight: SerializedBigNumber
   multiplier: string
 }
 
+const wbriseAddress = "0x0eb9036cbE0f052386f36170c6b07eF0a0E3f710"
+const wbriseDecimals = 18
+
+
 const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
+  try {
+    
+  
   const { pid, lpAddresses, token, quoteToken } = farm
+  
   const lpAddress = getAddress(lpAddresses)
   const calls = [
     // Balance of token in the LP contract
@@ -62,6 +74,8 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
 
   // Ratio in % of LP tokens that are staked in the MC, vs the total number in circulation
   const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+  // console.log(`farm ${farm.pid}: `, lpTokenBalanceMC[0].toNumber())
+  const farmTokenTotal = new BigNumber(lpTokenBalanceMC).div(BIG_TEN.pow(new BigNumber(farm.lpDecimals)))
 
   // Raw amount of token in the LP, including those not staked
   const tokenAmountTotal = new BigNumber(tokenBalanceLP).div(BIG_TEN.pow(tokenDecimals))
@@ -74,6 +88,19 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
   // Total staked in LP, in quote token value
   const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
+  // For farms that tokens instead of LP tokens. Get token price in Brise via the Router
+  const path = [lpAddress, wbriseAddress]
+  const router = getRouterContract()
+  let lpTokenPriceInBrise = new BigNumber(0)
+  let brisePriceUsd = new BigNumber(0)
+  if(!farm.isLpToken){
+    brisePriceUsd = await brisePriceFromAPI()
+    const amountIn = new BigNumber(1).times(BIG_TEN.pow(new BigNumber(farm.lpDecimals)))
+    const [farmToken, brisePriceBN] = await router.methods.getAmountsOut(amountIn, path).call({gasPrice: "0"})
+    lpTokenPriceInBrise = new BigNumber(brisePriceBN).div(BIG_TEN.pow(new BigNumber(wbriseDecimals)))
+  }
+  const lpTokenPriceUsd = lpTokenPriceInBrise.times(brisePriceUsd)
+  
   // Only make masterchef calls if farm has pid
   const [info, totalAllocPoint] =
     pid || pid === 0
@@ -98,12 +125,30 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
     quoteTokenAmountMc: quoteTokenAmountMc.toJSON(),
     tokenAmountTotal: tokenAmountTotal.toJSON(),
     quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
+    farmTokenTotal: new BigNumber(farmTokenTotal).toJSON(),
+    lpTokenPriceUsd: lpTokenPriceUsd.toJSON(),
     lpTotalSupply: new BigNumber(lpTotalSupply).toJSON(),
     lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
     tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
     poolWeight: poolWeight.toJSON(),
     multiplier: `${allocPoint.div(100).toString()}X`,
   }
+
+} catch (error) {
+    return {
+      tokenAmountMc: "0",
+      quoteTokenAmountMc: "0",
+      tokenAmountTotal: "0",
+      quoteTokenAmountTotal: "0",
+      farmTokenTotal: "0",
+      lpTokenPriceUsd: "0",
+      lpTotalSupply: "0",
+      lpTotalInQuoteToken: "0",
+      tokenPriceVsQuote: "0",
+      poolWeight: "0",
+      multiplier: "0",
+    }
+}
 }
 
 export default fetchFarm

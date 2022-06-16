@@ -141,3 +141,7 @@ export const useChainlinkOracleContract = () => {
   const web3 = useWeb3()
   return useMemo(() => getChainlinkOracleContract(web3), [web3])
 }
+export const useRouterContract = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getChainlinkOracleContract(web3), [web3])
+}

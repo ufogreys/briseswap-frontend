@@ -183,6 +183,46 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://briseswap.finance/',
   },
+  tokyo: {
+    symbol: 'TOKYO',
+    address: {
+      32520: '0x38EA4741d100cAe9700f66B194777F31919142Ee',
+      56: '',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://tokyocoin.live/',
+  },
+  eltg: {
+    symbol: 'ELTG',
+    address: {
+      32520: '0xb860eCD8400600c13342a751408737235E177077',
+      56: '',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://www.eltgraphen.com/',
+  },
+  mir: {
+    symbol: 'MIR',
+    address: {
+      32520: '0x2468dad471fA7E03d8029F057cc41742F017D53d',
+      56: '',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://mixedrealitygames.io/',
+  },
+  drv: {
+    symbol: 'DRV',
+    address: {
+      32520: '0xeB18A16A08530b811523fA49310319809ac4c979',
+      56: '',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://darrival.com/',
+  },
   // qsd: {
   //   symbol: 'QSD',
   //   address: {
