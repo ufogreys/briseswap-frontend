@@ -231,7 +231,7 @@ const tokens = {
       97: '',
     },
     decimals: 9,
-    projectLink: 'https://briseswap.finance/',
+    projectLink: 'https://brisecom.live/',
   },
   
 
