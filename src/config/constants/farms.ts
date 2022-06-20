@@ -291,6 +291,19 @@ const farms: FarmConfig[] = [
     token: tokens.wbnb,
     quoteToken: tokens.wbnb,
   },
+  {
+    pid: 22,
+    lpSymbol: 'BASKOM TOKEN',
+    lpAddresses: {
+      32520: '0x6cd08be8aa9b705ca86b4923b1784c0ee06e5220',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 9,
+    isLpToken: false,
+    token: tokens.baskom,
+    quoteToken: tokens.wbnb,
+  },
   // {
   //   pid: 2,
   //   lpSymbol: 'BUSD-BNB LP',

@@ -223,6 +223,18 @@ const tokens = {
     decimals: 9,
     projectLink: 'https://darrival.com/',
   },
+  baskom: {
+    symbol: 'BASKOM',
+    address: {
+      32520: '0x6cd08be8aa9b705ca86b4923b1784c0ee06e5220',
+      56: '',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://briseswap.finance/',
+  },
+  
+
   // qsd: {
   //   symbol: 'QSD',
   //   address: {
