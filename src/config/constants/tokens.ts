@@ -233,6 +233,26 @@ const tokens = {
     decimals: 9,
     projectLink: 'https://brisecom.live/',
   },
+  wolf: {
+    symbol: 'WOLF',
+    address: {
+      32520: '0x4Fb3DBF9111169ff60fFB8a7be1c6Fd3D4E417bC',
+      56: '',
+      97: '',
+    },
+    decimals: 19,
+    projectLink: 'https://alphatrades.co',
+  },
+  usdt: {
+    symbol: 'USDT',
+    address: {
+      32520: '0xDe14b85cf78F2ADd2E867FEE40575437D5f10c06',
+      56: '',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://tether.to',
+  }
   
 
   // qsd: {
