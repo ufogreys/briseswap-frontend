@@ -304,6 +304,46 @@ const farms: FarmConfig[] = [
     token: tokens.baskom,
     quoteToken: tokens.wbnb,
   },
+  {
+    pid: 23,
+    lpSymbol: 'WOLF TOKEN',
+    lpAddresses: {
+      32520: '0x4Fb3DBF9111169ff60fFB8a7be1c6Fd3D4E417bC',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 19,
+    isLpToken: false,
+    token: tokens.wolf,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 24,
+    lpSymbol: 'USDT TOKEN',
+    lpAddresses: {
+      32520: '0xDe14b85cf78F2ADd2E867FEE40575437D5f10c06',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: false,
+    token: tokens.usdt,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 25,
+    lpSymbol: 'BPAD-BRISE LP',
+    lpAddresses: {
+      32520: '0x717b699DFF3a99Bf424E0461Bb19AED92BF7730E',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: true,
+    token: tokens.bpad,
+    quoteToken: tokens.wbnb,
+  }
+
   // {
   //   pid: 2,
   //   lpSymbol: 'BUSD-BNB LP',
