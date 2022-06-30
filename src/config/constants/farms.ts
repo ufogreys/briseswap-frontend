@@ -89,7 +89,7 @@ const farms: FarmConfig[] = [
     lpAddresses: {
       32520: '0x1A8a039007186d7640C1D7Cd7c2606e333D04e03',
       97: '',
-      56: '0xCCA18B47A0Ec8579B53a084b96e3416deFE14574',
+      56: '',
     },
     lpDecimals: 18,
     isLpToken: false,
@@ -102,7 +102,7 @@ const farms: FarmConfig[] = [
     lpAddresses: {
       32520: '0xD6447d2fA919811c41a064bDbdaB1E281F8de9B2',
       97: '',
-      56: '0xCCA18B47A0Ec8579B53a084b96e3416deFE14574',
+      56: '',
     },
     lpDecimals: 18,
     isLpToken: false,
@@ -115,7 +115,7 @@ const farms: FarmConfig[] = [
     lpAddresses: {
       32520: '0x31226B28add9062c5064a9Bd35eA155F323C6ca6',
       97: '',
-      56: '0xCCA18B47A0Ec8579B53a084b96e3416deFE14574',
+      56: '',
     },
     lpDecimals: 9,
     isLpToken: false,
@@ -341,6 +341,19 @@ const farms: FarmConfig[] = [
     lpDecimals: 18,
     isLpToken: true,
     token: tokens.bpad,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 26,
+    lpSymbol: 'USDT-BRISE LP',
+    lpAddresses: {
+      32520: '0xAa5744f1de96e0acF432e1a93C8011445472F286',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: true,
+    token: tokens.usdt,
     quoteToken: tokens.wbnb,
   }
 

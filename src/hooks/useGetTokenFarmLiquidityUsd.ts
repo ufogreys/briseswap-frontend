@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
-import useBrisePriceFromAPI from 'hooks/useBrisePriceFromAPI'
+import { usePriceBnbBusd } from 'state/hooks'
 import { BIG_TEN } from 'utils/bigNumber'
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import { getAddress } from 'utils/addressHelpers'
 import { Address } from 'config/constants/types'
 
 import { useRouterContract } from './useContract'
@@ -15,7 +15,8 @@ const useGetTokenFarmLiquidityUsd = (tokenAddress: Address, tokenDecimals: numbe
     // getAddress
     const [tokenPrice, setTokenPrice] = useState<BigNumber | null>(null)
     const { fastRefresh } = useRefresh()
-    const brisePriceUSD = useBrisePriceFromAPI()
+    
+    const brisePriceUSD = usePriceBnbBusd()
     const router = useRouterContract()
     
     useEffect(() => {

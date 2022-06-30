@@ -4,7 +4,6 @@ import erc20 from 'config/abi/erc20.json'
 import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
 import { getRouterContract } from 'utils/contractHelpers'
 import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
-import brisePriceFromAPI from 'utils/brisePriceFromAPI'
 import multicall from 'utils/multicall'
 import { Farm, SerializedBigNumber } from '../types'
 
@@ -90,16 +89,22 @@ const fetchFarm = async (farm: Farm): Promise<PublicFarmData> => {
 
   // For farms that tokens instead of LP tokens. Get token price in Brise via the Router
   const path = [lpAddress, wbriseAddress]
+  // const path = [lpAddress, "0xDe14b85cf78F2ADd2E867FEE40575437D5f10c06"]
+
   const router = getRouterContract()
   let lpTokenPriceInBrise = new BigNumber(0)
   let brisePriceUsd = new BigNumber(0)
   if(!farm.isLpToken){
-    brisePriceUsd = await brisePriceFromAPI()
+    const briseAmountIn = "1000000000000000000"
+    const [, brisePriceUSDTBN] = await router.methods.getAmountsOut(briseAmountIn, [wbriseAddress, "0xDe14b85cf78F2ADd2E867FEE40575437D5f10c06"]).call({gasPrice: "0"})
+    brisePriceUsd =  new BigNumber(brisePriceUSDTBN).div(BIG_TEN.pow(new BigNumber(18)))
     const amountIn = new BigNumber(1).times(BIG_TEN.pow(new BigNumber(farm.lpDecimals)))
     const [farmToken, brisePriceBN] = await router.methods.getAmountsOut(amountIn, path).call({gasPrice: "0"})
     lpTokenPriceInBrise = new BigNumber(brisePriceBN).div(BIG_TEN.pow(new BigNumber(wbriseDecimals)))
+    // lpTokenPriceInBrise = new BigNumber(brisePriceBN).div(BIG_TEN.pow(new BigNumber(18)))
   }
   const lpTokenPriceUsd = lpTokenPriceInBrise.times(brisePriceUsd)
+  // const lpTokenPriceUsd = lpTokenPriceInBrise
   
   // Only make masterchef calls if farm has pid
   const [info, totalAllocPoint] =

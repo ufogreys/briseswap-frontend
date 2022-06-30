@@ -13,7 +13,6 @@ import { getBalanceAmount } from 'utils/formatBalance'
 import { BIG_ZERO } from 'utils/bigNumber'
 import useRefresh from 'hooks/useRefresh'
 import { filterFarmsByQuoteToken } from 'utils/farmsPriceHelpers'
-import useBrisePriceFromAPI from 'hooks/useBrisePriceFromAPI'
 import {
   fetchFarmsPublicDataAsync,
   fetchPoolsPublicDataAsync,
@@ -340,11 +339,8 @@ export const useAchievements = () => {
 }
 
 export const usePriceBnbBusd = (): BigNumber => {
-  // const bnbBusdFarm = useFarmFromPid(2)
-  // return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
-  
-  const briseBusdPrice = useBrisePriceFromAPI()
-  return briseBusdPrice
+  const bnbBusdFarm = useFarmFromPid(26)
+  return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
