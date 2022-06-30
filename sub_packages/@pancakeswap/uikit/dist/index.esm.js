@@ -3816,7 +3816,7 @@ var CakePrice = function (_a) {
     var cakePriceUsd = _a.cakePriceUsd;
     return cakePriceUsd ? (React.createElement(PriceLink, { href: "#", style: { pointerEvents: "none", cursor: "default" } },
         React.createElement(Icon$U, { width: "24px", mr: "8px" }),
-        React.createElement(Text, { color: "textSubtle", bold: true }, "$" + cakePriceUsd.toFixed(3)))) : (React.createElement(Skeleton, { width: 80, height: 24 }));
+        React.createElement(Text, { color: "textSubtle", bold: true }, "$" + cakePriceUsd.toFixed(6)))) : (React.createElement(Skeleton, { width: 80, height: 24 }));
 };
 var CakePrice$1 = React.memo(CakePrice);
 var templateObject_1$8;
