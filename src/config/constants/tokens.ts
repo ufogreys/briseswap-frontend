@@ -252,6 +252,16 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://tether.to',
+  },
+  abr: {
+    symbol: 'ABR',
+    address: {
+      32520: '0x9F7Bb6E8386ac9ad5e944d66fBa80F3F7231FA94',
+      56: '',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://aibra.io/',
   }
   
 

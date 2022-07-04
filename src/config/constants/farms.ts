@@ -355,6 +355,19 @@ const farms: FarmConfig[] = [
     isLpToken: true,
     token: tokens.usdt,
     quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 27,
+    lpSymbol: 'ABR TOKEN',
+    lpAddresses: {
+      32520: '0x9F7Bb6E8386ac9ad5e944d66fBa80F3F7231FA94',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 9,
+    isLpToken: false,
+    token: tokens.abr,
+    quoteToken: tokens.wbnb,
   }
 
   // {
