@@ -59,7 +59,7 @@ const FarmedStakingCard = () => {
     <StyledFarmStakingCard>
       <CardBody>
         <Heading scale="xl" mb="24px">
-          {t('Farms & Staking')}
+          {t('Mines & Staking')}
         </Heading>
         <CardImage src="/images/briseswap-bg-logo.svg" alt="Bswap logo" width={64} height={64} />
         <Block>

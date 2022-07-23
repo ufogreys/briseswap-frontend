@@ -262,6 +262,16 @@ const tokens = {
     },
     decimals: 9,
     projectLink: 'https://aibra.io/',
+  },
+  vtc: {
+    symbol: 'VTC',
+    address: {
+      32520: '0xe6F2c07942DA91134138041e6391E8457274E456',
+      56: '',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://openvaultnft.com/',
   }
   
 
