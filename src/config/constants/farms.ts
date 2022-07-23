@@ -397,7 +397,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 30,
-    lpSymbol: 'BPAD-BSWAP LP',
+    lpSymbol: 'TOKYO-BRISE LP',
     lpAddresses: {
       32520: '0xD323a843a5910ebdF79C333DD19aDe53E47005cF',
       97: '',
