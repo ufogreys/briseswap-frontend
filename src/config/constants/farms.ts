@@ -368,6 +368,45 @@ const farms: FarmConfig[] = [
     isLpToken: false,
     token: tokens.abr,
     quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 28,
+    lpSymbol: 'VTC TOKEN',
+    lpAddresses: {
+      32520: '0xe6F2c07942DA91134138041e6391E8457274E456',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: false,
+    token: tokens.vtc,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 29,
+    lpSymbol: 'BPAD-BSWAP LP',
+    lpAddresses: {
+      32520: '0xfE53e965aa767a2B830cB29a31E35EB60572584F',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: true,
+    token: tokens.bswap,
+    quoteToken: tokens.bpad,
+  },
+  {
+    pid: 30,
+    lpSymbol: 'BPAD-BSWAP LP',
+    lpAddresses: {
+      32520: '0xD323a843a5910ebdF79C333DD19aDe53E47005cF',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: true,
+    token: tokens.tokyo,
+    quoteToken: tokens.wbnb,
   }
 
   // {
