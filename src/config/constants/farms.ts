@@ -397,7 +397,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 30,
-    lpSymbol: 'BPAD-BSWAP LP',
+    lpSymbol: 'TOKYO-BRISE LP',
     lpAddresses: {
       32520: '0xD323a843a5910ebdF79C333DD19aDe53E47005cF',
       97: '',
@@ -761,16 +761,6 @@ const farms: FarmConfig[] = [
 //       56: '0xcdb0016d97fd0e7ec2c3b78aa4786cbd8e19c14c',
 //     },
 //     token: tokens.pmon,
-//     quoteToken: tokens.busd,
-//   },
-//   {
-//     pid: 378,
-//     lpSymbol: 'ONE-BUSD LP',
-//     lpAddresses: {
-//       97: '',
-//       56: '0x4d057f769d930eafd597b49d6fb2e1009a73a702',
-//     },
-//     token: tokens.one,
 //     quoteToken: tokens.busd,
 //   },
 //   {
