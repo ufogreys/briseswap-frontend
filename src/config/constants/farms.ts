@@ -764,16 +764,6 @@ const farms: FarmConfig[] = [
 //     quoteToken: tokens.busd,
 //   },
 //   {
-//     pid: 378,
-//     lpSymbol: 'ONE-BUSD LP',
-//     lpAddresses: {
-//       97: '',
-//       56: '0x4d057f769d930eafd597b49d6fb2e1009a73a702',
-//     },
-//     token: tokens.one,
-//     quoteToken: tokens.busd,
-//   },
-//   {
 //     pid: 377,
 //     lpSymbol: 'FINE-BNB LP',
 //     lpAddresses: {
