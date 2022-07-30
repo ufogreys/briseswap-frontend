@@ -272,6 +272,16 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://openvaultnft.com/',
+  },
+  meta: {
+    symbol: 'META',
+    address: {
+      32520: '0x31122FF4F06AC5392F46AFf05C3eB0677a05D210',
+      56: '',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://metaforcebrise.xyz/',
   }
   
 

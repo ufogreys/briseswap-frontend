@@ -32,19 +32,6 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wbnb,
   },
   {
-    pid: 2,
-    lpSymbol: 'OMNIA TOKEN',
-    lpAddresses: {
-      32520: '0x5d4685c2C75581C67b9D6292A065a767bC214681',
-      97: '',
-      56: '0xCCA18B47A0Ec8579B53a084b96e3416deFE14574',
-    },
-    lpDecimals: 8,
-    isLpToken: false,
-    token: tokens.omnia,
-    quoteToken: tokens.wbnb,
-  },
-  {
     pid: 3,
     lpSymbol: 'BPAD TOKEN',
     lpAddresses: {
@@ -55,6 +42,32 @@ const farms: FarmConfig[] = [
     lpDecimals: 8,
     isLpToken: false,
     token: tokens.bpad,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 31,
+    lpSymbol: 'META TOKEN',
+    lpAddresses: {
+      32520: '0x31122FF4F06AC5392F46AFf05C3eB0677a05D210',
+      97: '',
+      56: '',
+    },
+    lpDecimals: 18,
+    isLpToken: false,
+    token: tokens.meta,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 2,
+    lpSymbol: 'OMNIA TOKEN',
+    lpAddresses: {
+      32520: '0x5d4685c2C75581C67b9D6292A065a767bC214681',
+      97: '',
+      56: '0xCCA18B47A0Ec8579B53a084b96e3416deFE14574',
+    },
+    lpDecimals: 8,
+    isLpToken: false,
+    token: tokens.omnia,
     quoteToken: tokens.wbnb,
   },
   {
@@ -408,6 +421,9 @@ const farms: FarmConfig[] = [
     token: tokens.tokyo,
     quoteToken: tokens.wbnb,
   }
+
+  // Reversing mines: newest mines at the top
+  
 
   // {
   //   pid: 2,
